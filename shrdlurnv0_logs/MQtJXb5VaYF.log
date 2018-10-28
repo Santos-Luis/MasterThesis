@@ -1,0 +1,2 @@
+date=Thu Jun 21 23:42:14 WEST 2018	sessionId=MQtJXb5VaYF	remote=localhost	format=lisp2json	query=(execute (call edu.stanford.nlp.sempre.cubeworld.StacksWorld.getLevel (string remove)))	response=  (string [[0],[3],[2],[3],[3],[3],[3]]|[[],[3],[2],[3],[3],[3],[3]])
+date=Thu Jun 21 23:42:33 WEST 2018	sessionId=MQtJXb5VaYF	remote=localhost	format=lisp2json	query=(execute (call edu.stanford.nlp.sempre.cubeworld.StacksWorld.getLevel (string remove)))	response=  (string [[2],[3],[1],[2],[2]]|[[2],[],[1],[2],[2]])

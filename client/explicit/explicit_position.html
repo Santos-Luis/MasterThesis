@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+
+<h3 class="intro">Select a position (left | right) and provide the corresponding utterance</h3>
+
+<div id="positions">
+	<img id="posLeft" src="Left.jpg" alt="Pos Left" width="100" height="100" hspace="50" onclick="markPos(this)">
+	<img id="posRight" src="Right.jpg" alt="Pos Right" width="100" height="100" hspace="50" onclick="markPos(this)">
+</div>
+
+<div id="chat">
+	<input type="text" id="maintextarea" placeholder=" enter the utterance here and then press &crarr;"></input>
+	<button class="button" id="dobutton" ctitle="enter command (enter key)" onclick="enterPosition()">&crarr;</button>
+</div>
+
+<div class="w3-light-grey" id="progressBar">
+	<div id="progressBarPerc" class="w3-blue" style="height:24px;width:0%"></div>
+</div>
+
+<button class="back_button" onclick="back()">Back</button>
+
+
+<script type="text/javascript" src="main.js"></script>
+ 
+</body>
+</html>

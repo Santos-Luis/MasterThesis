@@ -1,0 +1,58 @@
+.intro {
+  margin-top: 2%;
+  font-family: "Helvetica";
+  font-size: 20px;
+  text-align: center;
+}
+
+#cubes {
+  margin-top: 6%;
+  text-align: center;
+  display:block;
+}
+
+#positions {
+  margin-top: 6%;
+  text-align: center;
+  display:block;
+}
+
+#chat {
+  margin-top: 6%;
+  text-align: center;
+  display:block;
+}
+
+#maintextarea {
+  font-family: 'Roboto Condensed', sans;
+  font-size: 18px;
+  appearance: none;
+  outline: none;
+  resize: none;
+  width: 585px;
+  border-radius: 5px;
+  padding: 3px;
+  border: solid 3px #969696;
+}
+#maintextarea:focus {
+  outline: none;
+  border: solid 3px #000;
+}
+
+.button {
+  font-size:20px;
+}
+
+.back_button {
+  margin:5% auto;
+  display:block;
+  color: blue;
+}
+
+#progressBar {
+  visibility:hidden;
+  margin:3% auto;
+  margin-left: auto; 
+  margin-right:auto;
+  width: 630px;
+}

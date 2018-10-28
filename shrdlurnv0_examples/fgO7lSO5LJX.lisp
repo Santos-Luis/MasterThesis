@@ -1,0 +1,18 @@
+(example
+  (id session:fgO7lSO5LJX)
+  (context (date 2018 5 14) (graph NaiveKnowledgeGraph ((string [[2],[0],[0],[1],[1]]) (name b) (name c))))
+  (timeStamp 2018-06-14T12:12:37.453)
+  (NBestInd 5)
+  (utterance "apagar castanho")
+  (targetFormula (call wallToString (call context:removeTop (call context:getTopColor (number 1 COLOR)))))
+  (targetValue (string [[2],[0],[0],[],[]]))
+)
+(example
+  (id session:fgO7lSO5LJX)
+  (context (date 2018 5 14) (graph NaiveKnowledgeGraph ((string [[1],[0],[3],[3],[2],[0]]) (name b) (name c))))
+  (timeStamp 2018-06-14T12:14:52.536)
+  (NBestInd 13)
+  (utterance "apagar azul")
+  (targetFormula (call wallToString (call context:removeTop (call context:getTopColor (number 0 COLOR)))))
+  (targetValue (string [[1],[],[3],[3],[2],[]]))
+)

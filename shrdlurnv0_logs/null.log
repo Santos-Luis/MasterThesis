@@ -1,0 +1,1 @@
+date=Sun May 20 16:38:11 WEST 2018	sessionId=null	remote=ip6-localhost	format=lisp2json	query=	response=(call wallToString (call context:removeTop (call context:getNonEmpty))) => (string [[1,2],[2,1,2],[]])

@@ -1,0 +1,18 @@
+(example
+  (learningMode Implicit)
+  (id session:Vb8cVc3N6mN)
+  (timeStamp 2018-10-12T16:58:10.653)
+  (NBestInd 4)
+  (utterance "apagar azul")
+  (targetFormula (call wallToString (call context:removeTop (call context:getTopColor (number 0 COLOR)))))
+  (targetValue (string [[1],[3],[2],[3],[],[1],[3]]))
+)
+(example
+  (learningMode Implicit)
+  (id session:Vb8cVc3N6mN)
+  (timeStamp 2018-10-12T16:59:49.786)
+  (NBestInd 2)
+  (utterance "apagar azul")
+  (targetFormula (call wallToString (call context:removeTop (call leftMost1 (call context:getNonEmpty)))))
+  (targetValue (string [[],[3],[2],[3],[3],[3],[3]]))
+)

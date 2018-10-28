@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+
+<h3 class="intro">Select the block with the desired color and provide the corresponding utterance</h3>
+
+<div id="cubes">
+	<img id="blueCube" src="blueCube.jpg" alt="Blue Cube" width="100" height="100" hspace="10" onclick="markColor(this)">
+	<img id="brownCube" src="brownCube.jpg" alt="Brown Cube" width="100" height="100" hspace="10" onclick="markColor(this)">
+	<img id="redCube" src="redCube.jpg" alt="Red Cube" width="100" height="100" hspace="10" onclick="markColor(this)">
+	<img id="orangeCube" src="orangeCube.jpg" alt="Orange Cube" width="100" height="100" hspace="10" onclick="markColor(this)">
+</div>	
+
+<div id="chat">
+	<input type="text" id="maintextarea" placeholder=" enter the utterance here and then press &crarr;"></input>
+	<button class="button" id="dobutton" ctitle="enter command (enter key)" onclick="enterColor()">&crarr;</button>
+</div>
+
+<div class="w3-light-grey" id="progressBar">
+	<div id="progressBarPerc" class="w3-blue" style="height:24px;width:0%"></div>
+</div>
+
+<button class="back_button" onclick="back()">Back</button>
+
+
+<script type="text/javascript" src="main.js"></script>
+ 
+</body>
+</html>

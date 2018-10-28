@@ -1,0 +1,15 @@
+#!/bin/sh
+for turkid in $(< shrdlurn/turkers.txt)
+do
+egrep -e "(-train.correct.mean|-train.correctBaseline.mean)" _OUTPATH_/${turkid}/output.map | paste -d "\t" - - | sed -e "s/$/$(echo '\t')${turkid}/"
+done >> all99turkers.correct.mean.full
+
+for turkid in $(< shrdlurn/turkers.txt)
+do
+egrep -e "(-train.correct.mean|-train.correctBaseline.mean)" _OUTPATH_mem/${turkid}/output.map | paste -d "\t" - - | sed -e "s/$/$(echo '\t')${turkid}/"
+done >> all99turkers.correct.mean.mem
+
+for turkid in $(< shrdlurn/turkers.txt)
+do
+egrep -e "(-train.correct.mean|-train.correctBaseline.mean)" _OUTPATH_half/${turkid}/output.map | paste -d "\t" - - | sed -e "s/$/$(echo '\t')${turkid}/"
+done >> all99turkers.correct.mean.half

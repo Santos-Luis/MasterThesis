@@ -1,0 +1,34 @@
+#!/bin/sh
+SEMPATH=.
+GRAMMAR=./shrdlurn/stacks.concise.grammar
+mkdir shrdlurnv0_examples
+mkdir shrdlurnv0_logs
+mkdir _OUTPATH_
+cd $SEMPATH
+
+if [ -z "$1" ]; then
+	ACTIVE=false
+else
+	ACTIVE=$1
+fi
+
+LEARNOPTS="-Parser FloatingParser -FloatingParser.maxDepth 8 -FloatingParser.useSizeInsteadOfDepth true -Params.l1Reg lazy -Params.l1RegCoeff 0.001 -Parser.beamSize 100 -StacksWorldFeatureComputer.ngramN 2 -Params.initStepSize 0.1 -Params.adaptiveStepSize true -FeatureExtractor.featureDomains tree subtree"
+
+SESSIONSTUFF="-Master.onlineLearnExamples false -Master.independentSessions true"
+
+PRAG="-Master.bePragmatic true -PragmaticListener.addModelProb true -PragmaticListener.smoothAlpha 1.0 -PragmaticListener.uniformWeight 0.001 -PragmaticListener.lambda 3.0 -Learner.onlineEvaluation true -Derivation.comparePragmatically true"
+
+OPTIONS="-Dmodules=core,cubeworld -cp libsempre/*:lib/* -ea edu.stanford.nlp.sempre.Main  -execDir _OUTPATH_/runFloat -overwriteExecDir -addToView 0 -Main.interactive -JavaExecutor.convertNumberValues false  -JavaExecutor.classPathPrefix edu.stanford.nlp.sempre.cubeworld.StacksWorld -FeatureExtractor.featureComputers cubeworld.StacksWorldFeatureComputer  -Params.initWeightsRandomly false -Grammar.inPaths $GRAMMAR -Parser.pruneErrorValues true -JoinFn.typeInference true -LanguageAnalyzer.lowerCaseTokens true -Master.activeLearningGame $ACTIVE"
+
+# features are tree, heads, ngram
+DEBUG="-Xdebug -Xrunjdwp:server=y,transport=dt_socket,suspend=n,address=8898"
+
+if [ "$HOSTNAME" = "jonsson.stanford.edu" ]; then
+    echo "running on jonsson"
+    TRAIN_OUTS_SERVER="-Master.newExamplesPath ./shrdlurnv0_examples/ -Master.logPath ./shrdlurnv0_logs/"
+    rlwrap java $OPTIONS $LEARNOPTS $SESSIONSTUFF $TRAIN_OUTS_SERVER $PRAG -Server.numThreads 4  -server true "$@"
+else
+    echo "not running on jonsson"
+    TRAIN_OUTS_LOCAL="-Master.newExamplesPath ./shrdlurnv0_examples/ -Master.logPath ./shrdlurnv0_logs/"
+    rlwrap java $OPTIONS $LEARNOPTS $TRAIN_OUTS_LOCAL $SESSIONSTUFF $PRAG -Server.numThreads 1 -server true "$@"
+fi

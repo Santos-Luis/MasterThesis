@@ -1,0 +1,7 @@
+*.java
+cache
+corenlp
+freebase
+test
+tables
+overnight

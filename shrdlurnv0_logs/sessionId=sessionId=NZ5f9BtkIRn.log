@@ -1,0 +1,4 @@
+date=Mon May 21 11:40:51 WEST 2018	sessionId=sessionId=sessionId=NZ5f9BtkIRn	remote=localhost	format=lisp2json	query=(explicit)	response=  Select the type of explicit feedback to provide:
+date=Mon May 21 11:40:51 WEST 2018	sessionId=sessionId=sessionId=NZ5f9BtkIRn	remote=localhost	format=lisp2json	query=(color)	response=  [[0],[1],[2],[3]]
+date=Mon May 21 11:40:51 WEST 2018	sessionId=sessionId=sessionId=NZ5f9BtkIRn	remote=localhost	format=lisp2json	query=3 laranja	response=(call wallToString (call context:stackOnTop (call context:getTopColor (number 3 COLOR)) (number 3 COLOR))) => (string [[0],[1],[2],[3,3]])
+date=Mon May 21 11:40:51 WEST 2018	sessionId=sessionId=sessionId=NZ5f9BtkIRn	remote=localhost	format=lisp2json	query=(normal)	response=  Enter an utterance to parse or one of the following commands:

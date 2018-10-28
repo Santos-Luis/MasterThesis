@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="compile" name="semparse">
+  <!-- Set useful variables -->
+  <property name="target" value="1.8"/>
+  <property name="source" value="1.8"/>
+  <property name="root" value="."/>
+  <property name="src" location="${root}/src/"/>
+  <property name="classes" location="${root}/classes"/>
+  <property name="lib" location="${root}/lib"/>
+  <property name="libsempre" location="${root}/libsempre"/>
+  <path id="lib.path">
+    <fileset dir="${libsempre}" includes="*.jar"/>
+    <fileset dir="${lib}" includes="*.jar"/>
+  </path>
+
+  <!-- Create directories -->
+  <target name="init">
+    <exec executable="${root}/scripts/extract-module-classes.rb"/>
+    <mkdir dir="${classes}"/>
+    <mkdir dir="${libsempre}"/>
+  </target>
+
+  <!-- Compile -->
+  <target name="compile" depends="init">
+    <antcall target="compile.released"/>
+    <!-- BEGIN_HIDE -->
+    <antcall target="compile.internal"/>
+    <!-- END_HIDE -->
+  </target>
+
+  <target name="compile.released" depends="init,core,cache,corenlp,freebase,tables,overnight"/>
+
+  <!-- Compile core -->
+  <target name="core" depends="init">
+    <echo message="Compiling ${ant.project.name}: core"/>
+    <mkdir dir="${classes}"/>
+    <javac srcdir="${src}" destdir="${classes}" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/*.java"/>
+      <include name="edu/stanford/nlp/sempre/test/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-core.jar" basedir="${classes}" includes="edu/**"/>
+  </target>
+
+  <!-- Compile cache -->
+  <target name="cache" depends="init">
+    <echo message="Compiling ${ant.project.name}: cache"/>
+    <mkdir dir="${classes}/cache"/>
+    <javac srcdir="${src}" destdir="${classes}/cache" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/cache/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-cache.jar" basedir="${classes}/cache"/>
+  </target>
+
+  <!-- Compile corenlp -->
+  <target name="corenlp" depends="init,core,cache">
+    <echo message="Compiling ${ant.project.name}: corenlp"/>
+    <mkdir dir="${classes}/corenlp"/>
+    <javac srcdir="${src}" destdir="${classes}/corenlp" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/corenlp/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-corenlp.jar" basedir="${classes}/corenlp"/>
+  </target>
+
+  <!-- Compile freebase -->
+  <target name="freebase" depends="init,core,cache">
+    <echo message="Compiling ${ant.project.name}: freebase"/>
+    <mkdir dir="${classes}/freebase"/>
+    <javac srcdir="${src}" destdir="${classes}/freebase" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/freebase/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-freebase.jar" basedir="${classes}/freebase"/>
+  </target>
+
+  <!-- Compile tables -->
+  <target name="tables" depends="init,core,corenlp">
+    <echo message="Compiling ${ant.project.name}: tables"/>
+    <mkdir dir="${classes}/tables"/>
+    <javac srcdir="${src}" destdir="${classes}/tables" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/tables/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-tables.jar" basedir="${classes}/tables"/>
+  </target>
+
+  <!-- Compile overnight -->
+  <target name="overnight" depends="init,core">
+    <echo message="Compiling ${ant.project.name}: overnight"/>
+    <mkdir dir="${classes}/overnight"/>
+    <javac srcdir="${src}" destdir="${classes}/overnight" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/overnight/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-overnight.jar" basedir="${classes}/overnight"/>
+  </target>
+
+  <!-- BEGIN_HIDE -->
+
+  <target name="compile.internal" depends="fbalignment,paraphrase,clojure,regex,jungle,logicpuzzles,cubeworld"/>
+
+  <!-- Compile fbalignment -->
+  <target name="fbalignment" depends="init,freebase">
+    <echo message="Compiling ${ant.project.name}: fbalignment"/>
+    <mkdir dir="${classes}/fbalignment"/>
+    <javac srcdir="${src}" destdir="${classes}/fbalignment" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/fbalignment/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-fbalignment.jar" basedir="${classes}/fbalignment"/>
+  </target>
+
+  <!-- Compile paraphrase -->
+  <target name="paraphrase" depends="init,fbalignment">
+    <echo message="Compiling ${ant.project.name}: paraphrase"/>
+    <mkdir dir="${classes}/paraphrase"/>
+    <javac srcdir="${src}" destdir="${classes}/paraphrase" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/paraphrase/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-paraphrase.jar" basedir="${classes}/paraphrase"/>
+  </target>
+
+  <!-- Compile clojure -->
+  <target name="clojure" depends="init,core">
+    <echo message="Compiling ${ant.project.name}: clojure"/>
+    <mkdir dir="${classes}/clojure"/>
+    <javac srcdir="${src}" destdir="${classes}/clojure" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/clojure/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-clojure.jar" basedir="${classes}/clojure"/>
+  </target>
+
+  <!-- Compile regex -->
+  <target name="regex" depends="init,core">
+    <echo message="Compiling ${ant.project.name}: regex"/>
+    <mkdir dir="${classes}/regex"/>
+    <javac srcdir="${src}" destdir="${classes}/regex" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/regex/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-regex.jar" basedir="${classes}/regex"/>
+  </target>
+
+  <!-- Compile jungle -->
+  <target name="jungle" depends="init,core,cache">
+    <echo message="Compiling ${ant.project.name}: jungle"/>
+    <mkdir dir="${classes}/jungle"/>
+    <javac srcdir="${src}" destdir="${classes}/jungle" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/jungle/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-jungle.jar" basedir="${classes}/jungle"/>
+  </target>
+
+  <!-- Compile logicpuzzles -->
+  <target name="logicpuzzles" depends="init,core">
+    <echo message="Compiling ${ant.project.name}: logicpuzzles"/>
+    <mkdir dir="${classes}/logicpuzzles"/>
+    <javac srcdir="${src}" destdir="${classes}/logicpuzzles" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/logicpuzzles/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-logicpuzzles.jar" basedir="${classes}/logicpuzzles"/>
+  </target>
+
+    <!-- Compile cubeworld -->
+  <target name="cubeworld" depends="init,core">
+    <echo message="Compiling ${ant.project.name}: cubeworld"/>
+    <mkdir dir="${classes}/cubeworld"/>
+    <javac srcdir="${src}" destdir="${classes}/cubeworld" classpathref="lib.path" debug="true" includeantruntime="false" source="${source}" target="${target}">
+      <include name="edu/stanford/nlp/sempre/cubeworld/"/>
+    </javac>
+    <jar destfile="${libsempre}/sempre-cubeworld.jar" basedir="${classes}/cubeworld"/>
+  </target>
+
+  <!-- END_HIDE -->
+
+  <!-- Clean up -->
+  <target name="clean">
+    <delete includeemptydirs="true" quiet="true">
+      <fileset dir="${classes}" followsymlinks="false"/>
+      <fileset dir="${libsempre}" followsymlinks="false"/>
+      <fileset file="module-classes.txt" followsymlinks="false"/>
+    </delete>
+  </target>
+
+</project>
