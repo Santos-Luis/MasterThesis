@@ -1,10 +1,12 @@
 The game ONLY works in Google chrome and Mozilla firefox  
 If you are using MacOS X, and you do not have Homebrew, go to https://brew.sh/ to install it<br/>
 
-LINUX                       ||  MacOS X  
-sudo apt-get install ant || brew install ant  
-sudo apt-get install rlwrap || brew install rlwrap  
-sudo apt-get install ruby || brew install ruby <br/>
+| LINUX                       | MacOS X
+| --------------------------- | ---
+| sudo apt-get install ant    | brew install ant
+| sudo apt-get install rlwrap | brew install rlwrap
+| sudo apt-get install ruby   | brew install ruby
+<br/>
 
 cd *game folder*  
 ./mySh.sh false <br/>
